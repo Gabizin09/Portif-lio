@@ -1,0 +1,129 @@
+/* General Styles */
+:root {
+    --burger-orange: #FF8C00;
+    --burger-black: #1A1A1A;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--burger-black);
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+}
+
+/* Logo Styles */
+.logo-main {
+    max-width: 200px;
+    height: auto;
+    margin: 20px auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-main:hover {
+    transform: scale(1.05);
+}
+
+/* Navbar Styles */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sticky-top {
+    top: 0;
+    z-index: 1020;
+}
+
+/* Category Filters */
+.container.py-4 {
+    margin-top: 20px;
+}
+
+/* Product Cards */
+.card {
+    background-color: var(--burger-black);
+    border: 2px solid var(--burger-orange);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+}
+
+.card-body {
+    color: white;
+}
+
+.card-title {
+    color: var(--burger-orange);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card .btn-primary {
+    background-color: var(--burger-orange);
+    border-color: var(--burger-orange);
+    width: 100%;
+}
+
+.card .btn-primary:hover {
+    background-color: #FF7300;
+    border-color: #FF7300;
+}
+
+/* Category Filter Buttons */
+.btn-outline-primary {
+    color: var(--burger-orange);
+    border-color: var(--burger-orange);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary.active {
+    background-color: var(--burger-orange);
+    border-color: var(--burger-orange);
+    color: white;
+}
+
+/* Price Styling */
+.card-text strong {
+    color: var(--burger-orange);
+    font-size: 1.2rem;
+}
+
+/* Cart Modal */
+.modal-content {
+    background-color: var(--burger-black);
+    color: white;
+    border: 1px solid var(--burger-orange);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--burger-orange);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--burger-orange);
+}
+
+/* Product Image */
+.product-img {
+    width: 100%; /* Ajusta a largura para ocupar todo o espaço do card */
+    height: 200px; /* Define uma altura fixa */
+    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .logo-main {
+        max-width: 150px;
+    }
+}
+
