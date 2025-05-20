@@ -1,55 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/stlyes.css">
-    <title>Busca de Vagas</title>
+    <title>Busca de Empregos</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Logo" width="48" height="48">
-            <span>VagasFácil</span>
-        </div>
-        <div class="auth-links">
-            <button onclick="window.location.href='login.html'">Login</button>
-            <button onclick="window.location.href='cadastro.html'">Cadastro</button>
-        </div>
+    <header>
+        <nav>
+            <div class="logo">Inimigo do desemprego</div>
+            <div class="nav-links">
+                <a href="#" id="loginBtn">Login</a>
+                <a href="#" id="cadastroBtn">Cadastro</a>
+            </div>
+        </nav>
     </header>
-    <main class="main-content">
-        <div class="search-area">
-            <h1>Busque sua Vaga de Emprego</h1>
-            <p class="subtitle">Encontre oportunidades de trabalho de forma rápida e fácil.</p>
-            <form id="search-form">
-                <input type="text" id="search-input" placeholder="Digite cargo, área ou cidade...">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
-        <section class="destaques">
-            <h2>Vagas em destaque</h2>
-            <ul>
-                <li>
-                    <strong>Desenvolvedor Front-end</strong> <br>
-                    <span>São Paulo, SP</span> <br>
-                    <span>Salário: R$ 5.000,00</span>
-                </li>
-                <li>
-                    <strong>Analista de Dados</strong> <br>
-                    <span>Remoto</span> <br>
-                    <span>Salário: R$ 6.500,00</span>
-                </li>
-                <li>
-                    <strong>Designer Gráfico</strong> <br>
-                    <span>Belo Horizonte, MG</span> <br>
-                    <span>Salário: R$ 3.800,00</span>
-                </li>
-            </ul>
+
+    <main>
+        <section class="search-section">
+            <h1>Encontre o emprego dos seus sonhos</h1>
+            <div class="search-container">
+                <input type="text" id="jobSearch" placeholder="Cargo ou palavra-chave">
+                <input type="text" id="locationSearch" placeholder="Localização">
+                <button id="searchBtn">Buscar</button>
+            </div>
+        </section>
+
+        <section class="jobs-section">
+            <h2>Vagas em Destaque</h2>
+            <div class="jobs-container" id="jobsList">
+                <!-- Jobs will be inserted here by JavaScript -->
+            </div>
         </section>
     </main>
-    <footer class="main-footer">
-        <p>&copy; 2025 VagasFácil. Todos os direitos reservados.</p>
-    </footer>
-    <script src="scripts/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

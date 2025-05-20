@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: linear-gradient(
+        rgba(13, 27, 42, 0.8),
+        rgba(27, 38, 59, 0.8)
+    ), url('https://th.bing.com/th/id/OIP.a_sOnyZED8-Iinw6C9joowHaEp?w=626&h=393&rs=1&pid=ImgDetMain');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.form-container {
+    background: rgba(15, 52, 96, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(65, 90, 119, 0.4);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    border: 1px solid rgba(87, 204, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(87, 204, 255, 0.5);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #fff;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(87, 204, 255, 0.3);
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #57ccff;
+    box-shadow: 0 0 15px rgba(87, 204, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #57ccff, #1e3a5f);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #1e3a5f, #57ccff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(87, 204, 255, 0.4);
+}
+
+#voltarBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    padding: 10px 20px;
+    z-index: 1000;
+    background: rgba(15, 52, 96, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(87, 204, 255, 0.3);
+}
+
+.cadastro-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.cadastro-link a {
+    color: #57ccff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cadastro-link a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(87, 204, 255, 0.5);
+}

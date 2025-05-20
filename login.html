@@ -1,34 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/login.css">
     <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <form id="login-form">
-        <h2>Login</h2>
-        <p>Entre com suas credenciais para acessar sua conta.</p>
-        
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" placeholder="Seu nome de usuário" required>
+    <button id="voltarBtn">Voltar</button>
+    <div class="form-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" placeholder="Sua senha" required>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
 
-        <div class="options">
-            <label>
-                <input type="checkbox" id="remember" name="remember">
-                Lembrar de mim
-            </label>
-            <a href="#">Esqueceu a senha?</a>
-        </div>
-
-        <button type="submit">Entrar</button>
-        <p class="signup">Não possui uma conta? <a href="cadastro.html">Cadastre-se</a></p>
-    </form>
-
-    <script src="scripts/login.js"></script>
+            <button type="submit">Entrar</button>
+        </form>
+        <p id="mensagem"></p>
+        <p class="cadastro-link">Não tem um perfil? <a href="cadastro.html">Criar perfil</a></p>
+    </div>
+    <script src="js/login.js"></script>
 </body>
 </html>
