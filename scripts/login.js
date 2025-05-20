@@ -1,21 +1,28 @@
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
     
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
-    const lembrar = document.getElementById('lembrar').checked;
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
 
-    // Aqui você pode adicionar sua lógica de autenticação
-    // Por exemplo, enviar para um servidor ou verificar localmente
-
-    console.log('Tentativa de login:', { email, lembrar });
-
-    // Simulando um login bem-sucedido
-    // Substitua isto pela sua lógica real de autenticação
-    if (email && senha) {
-        // Redirecionar para a página principal após login bem-sucedido
-        window.location.href = 'index.html';
-    }
+        // Check if email matches registered email
+        const registeredEmail = localStorage.getItem('userEmail');
+        
+        if (email === registeredEmail && senha) {
+            // Login successful
+            localStorage.setItem('userLoggedIn', 'true');
+            window.location.href = 'index.html';
+        } else {
+            // Show error message
+            const errorMsg = document.createElement('div');
+            errorMsg.textContent = 'Email ou senha inválidos';
+            errorMsg.className = 'error-message';
+            loginForm.appendChild(errorMsg);
+            setTimeout(() => errorMsg.remove(), 3000);
+        }
+    });
 });
 
 // Mostrar/ocultar senha
