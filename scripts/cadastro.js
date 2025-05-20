@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('cadastroForm');
-    const cpfInput = document.getElementById('cpf');
-    const telefoneInput = document.getElementById('telefone');
-    const voltarBtn = document.getElementById('voltarBtn');
-
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+    
     // Máscara para CPF
+    const cpfInput = document.getElementById('cpf');
     cpfInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length <= 11) {
@@ -14,34 +13,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Máscara para telefone
+    const telefoneInput = document.getElementById('telefone');
     telefoneInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length <= 11) {
-            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            if (value.length === 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else {
+                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            }
             e.target.value = value;
         }
     });
 
-    // Add event listener for back button
-    voltarBtn.addEventListener('click', function() {
-        window.location.href = 'index.html';
+    // Toggle senha
+    togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
     });
 
+    // Validação do formulário
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const nome = document.getElementById('nome').value.trim();
         const cpf = cpfInput.value.replace(/\D/g, '');
         const telefone = telefoneInput.value.replace(/\D/g, '');
-        const dataNascimento = document.getElementById('dataNascimento').value;
         const email = document.getElementById('email').value.trim();
         const senha = document.getElementById('senha').value;
         const confirmarSenha = document.getElementById('confirmarSenha').value;
-        const mensagemElement = document.getElementById('mensagem');
+        const dataNascimento = document.getElementById('dataNascimento').value;
+        const termos = document.getElementById('termos').checked;
 
         // Validações
         if (nome.length < 3) {
-            mostrarMensagem('Nome deve ter no mínimo 3 caracteres', 'error');
+            mostrarMensagem('O nome deve ter pelo menos 3 caracteres', 'error');
             return;
         }
 
@@ -50,18 +60,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        if (telefone.length < 10 || telefone.length > 11) {
+        if (telefone.length < 10) {
             mostrarMensagem('Telefone inválido', 'error');
             return;
         }
 
         if (!validarEmail(email)) {
-            mostrarMensagem('Email inválido', 'error');
+            mostrarMensagem('E-mail inválido', 'error');
             return;
         }
 
         if (senha.length < 8) {
-            mostrarMensagem('A senha deve ter no mínimo 8 caracteres', 'error');
+            mostrarMensagem('A senha deve ter pelo menos 8 caracteres', 'error');
             return;
         }
 
@@ -70,18 +80,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (!termos) {
+            mostrarMensagem('Você deve aceitar os termos de uso', 'error');
+            return;
+        }
+
         // Se passou por todas as validações
         mostrarMensagem('Cadastro realizado com sucesso!', 'success');
         
+        // Redirecionar após 2 segundos
         setTimeout(() => {
-            window.location.href = 'confirmar.html';
+            window.location.href = 'login.html';
         }, 2000);
     });
 
     function mostrarMensagem(texto, tipo) {
-        const mensagemElement = document.getElementById('mensagem');
-        mensagemElement.textContent = texto;
-        mensagemElement.style.color = tipo === 'error' ? '#d93025' : '#28a745';
+        const mensagem = document.getElementById('mensagem');
+        mensagem.textContent = texto;
+        mensagem.className = 'mensagem ' + tipo;
+        mensagem.style.display = 'block';
+        
+        setTimeout(() => {
+            mensagem.style.display = 'none';
+        }, 3000);
     }
 
     function validarEmail(email) {
