@@ -3,124 +3,164 @@ body {
     padding: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
     background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
 
-#login-form {
-    background: rgba(255,255,255,0.97);
-    padding: 38px 44px 32px 44px;
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
     border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(33,147,176,0.13);
-    width: 370px;
-    text-align: center;
+    box-shadow: 0 8px 32px rgba(33, 147, 176, 0.15);
+    width: 100%;
+    max-width: 400px;
     position: relative;
-    animation: fadeIn 1s;
+    animation: fadeIn 0.6s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-30px);}
-    to { opacity: 1; transform: translateY(0);}
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-#login-form h2 {
-    margin-bottom: 12px;
+.voltar-btn {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.voltar-btn:hover {
+    transform: translateX(-5px);
+}
+
+.voltar-icon {
+    font-size: 1.2rem;
+}
+
+.login-form h1 {
     color: #185a9d;
-    font-size: 2em;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-#login-form p {
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 22px;
+.subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-#login-form label {
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
     display: block;
-    text-align: left;
-    margin: 12px 0 6px;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
     color: #2193b0;
-    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
-#login-form input[type="text"],
-#login-form input[type="password"] {
+.input-group input {
     width: 100%;
     padding: 12px;
-    border: 1.5px solid #b2bec3;
+    border: 2px solid #e0e0e0;
     border-radius: 8px;
-    font-size: 15px;
-    margin-bottom: 12px;
-    background: #f4f8fb;
-    transition: border 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #f8f9fa;
 }
 
-#login-form input[type="text"]:focus,
-#login-form input[type="password"]:focus {
-    border: 1.5px solid #43cea2;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(67,206,162,0.08);
+.input-group input:focus {
+    border-color: #43cea2;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.1);
 }
 
 .options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-    margin-bottom: 18px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.lembrar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: #555;
+    cursor: pointer;
 }
 
-.options a {
-    color: #185a9d;
+.lembrar input[type="checkbox"] {
+    accent-color: #43cea2;
+}
+
+.esqueci-senha {
+    color: #2193b0;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
-.options a:hover {
-    text-decoration: underline;
+.esqueci-senha:hover {
     color: #43cea2;
+    text-decoration: underline;
 }
 
-#login-form button {
+.login-btn {
     width: 100%;
     padding: 12px;
     border: none;
     border-radius: 25px;
     background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-    color: #fff;
-    font-size: 17px;
-    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 12px;
-    box-shadow: 0 2px 10px rgba(33,147,176,0.08);
-    transition: background 0.2s, transform 0.2s;
+    transition: all 0.3s;
 }
 
-#login-form button:hover {
-    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
-    transform: scale(1.04);
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
 }
 
-.signup {
-    margin-top: 22px;
-    font-size: 15px;
+.cadastro-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
 }
 
-.signup a {
-    color: #185a9d;
+.cadastro-link a {
+    color: #2193b0;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
-.signup a:hover {
-    text-decoration: underline;
+.cadastro-link a:hover {
     color: #43cea2;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        margin: 1rem;
+        padding: 2rem;
+    }
+
+    .voltar-btn {
+        top: -40px;
+    }
 }

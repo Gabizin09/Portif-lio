@@ -4,24 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="./styles/login.css">
 </head>
 <body>
-    <button id="voltarBtn">Voltar</button>
-    <div class="form-container">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+    <div class="login-container">
+        <a href="index.html" class="voltar-btn">
+            <span class="voltar-icon">←</span> Voltar
+        </a>
+        
+        <form id="login-form" class="login-form">
+            <h1>Bem-vindo de volta!</h1>
+            <p class="subtitle">Entre na sua conta para continuar</p>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
 
-            <button type="submit">Entrar</button>
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="options">
+                <label class="lembrar">
+                    <input type="checkbox" id="lembrar">
+                    Lembrar de mim
+                </label>
+                <a href="#" class="esqueci-senha">Esqueci a senha</a>
+            </div>
+
+            <button type="submit" class="login-btn">Entrar</button>
+
+            <p class="cadastro-link">
+                Ainda não tem uma conta? 
+                <a href="cadastro.html">Criar conta</a>
+            </p>
         </form>
-        <p id="mensagem"></p>
-        <p class="cadastro-link">Não tem um perfil? <a href="cadastro.html">Criar perfil</a></p>
     </div>
-    <script src="js/login.js"></script>
+    <script src="./scripts/login.js"></script>
 </body>
 </html>

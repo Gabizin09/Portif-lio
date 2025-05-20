@@ -1,21 +1,3 @@
-document.getElementById('job-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const jobTitle = document.getElementById('job-title').value;
-    const companyName = document.getElementById('company-name').value;
-    const jobDescription = document.getElementById('job-description').value;
-    const jobLocation = document.getElementById('job-location').value;
-    const salary = document.getElementById('salary').value;
-
-    console.log('Título da Vaga:', jobTitle);
-    console.log('Nome da Empresa:', companyName);
-    console.log('Descrição da Vaga:', jobDescription);
-    console.log('Localização:', jobLocation);
-    console.log('Salário:', salary);
-
-    alert('Formulário de cadastro enviado com sucesso!');
-});
-
 const jobListings = [
     {
         title: "Desenvolvedor Frontend",
@@ -40,30 +22,30 @@ const jobListings = [
     }
 ];
 
-document.getElementById('search-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const searchKeyword = document.getElementById('search-keyword').value.toLowerCase();
-    const searchLocation = document.getElementById('search-location').value.toLowerCase();
-
-    const results = jobListings.filter(job => {
-        const matchesKeyword = job.title.toLowerCase().includes(searchKeyword) || job.description.toLowerCase().includes(searchKeyword);
-        const matchesLocation = job.location.toLowerCase().includes(searchLocation);
-        return matchesKeyword && matchesLocation;
+// Busca de vagas
+const searchForm = document.getElementById('search-form');
+if (searchForm) {
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const searchKeyword = document.getElementById('search-keyword').value.toLowerCase();
+        const searchLocation = document.getElementById('search-location').value.toLowerCase();
+        const results = jobListings.filter(job => {
+            const matchesKeyword = job.title.toLowerCase().includes(searchKeyword) || job.description.toLowerCase().includes(searchKeyword);
+            const matchesLocation = job.location.toLowerCase().includes(searchLocation);
+            return matchesKeyword && matchesLocation;
+        });
+        displayResults(results);
     });
-
-    displayResults(results);
-});
+}
 
 function displayResults(results) {
     const resultsContainer = document.getElementById('results');
+    if (!resultsContainer) return;
     resultsContainer.innerHTML = '';
-
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>Nenhuma vaga encontrada.</p>';
         return;
     }
-
     results.forEach(job => {
         const jobElement = document.createElement('div');
         jobElement.classList.add('job-listing');
