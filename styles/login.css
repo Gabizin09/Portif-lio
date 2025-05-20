@@ -1,8 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #FFEB3B 0%, #F44336 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -10,26 +10,39 @@ body {
 }
 
 .login-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(33, 147, 176, 0.15);
+    background: #fff;
+    border: 5px dashed #FF5722;
+    padding: 2rem;
+    border-radius: 20px;
     width: 100%;
     max-width: 400px;
     position: relative;
-    animation: fadeIn 0.6s ease-out;
+    animation: bounceIn 1s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .voltar-btn {
     position: absolute;
     top: -50px;
     left: 0;
-    color: white;
+    color: #3F51B5;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -47,111 +60,110 @@ body {
 }
 
 .login-form h1 {
-    color: #185a9d;
+    color: #3F51B5;
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     text-align: center;
 }
 
 .subtitle {
-    color: #666;
     text-align: center;
-    margin-bottom: 2rem;
+    color: #9E9E9E;
+    margin-bottom: 1rem;
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: #2193b0;
-    font-weight: 600;
+    margin-bottom: 5px;
+    color: #E91E63;
+    font-weight: bold;
 }
 
 .input-group input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    padding: 10px;
+    border: 3px solid #CDDC39;
+    border-radius: 10px;
     font-size: 1rem;
-    transition: all 0.3s;
-    background: #f8f9fa;
 }
 
 .input-group input:focus {
-    border-color: #43cea2;
-    background: white;
     outline: none;
-    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.1);
+    border-color: #FFC107;
 }
 
 .options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 0.9rem;
 }
 
 .lembrar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: #555;
-    cursor: pointer;
+    gap: 5px;
+    color: #9C27B0;
 }
 
 .lembrar input[type="checkbox"] {
-    accent-color: #43cea2;
+    accent-color: #8BC34A;
 }
 
 .esqueci-senha {
-    color: #2193b0;
+    color: #3F51B5;
     text-decoration: none;
-    transition: color 0.3s;
+    font-size: 0.9rem;
 }
 
 .esqueci-senha:hover {
-    color: #43cea2;
     text-decoration: underline;
 }
 
 .login-btn {
     width: 100%;
     padding: 12px;
+    background: #03A9F4;
+    color: white;
     border: none;
     border-radius: 25px;
-    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-    color: white;
     font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .cadastro-link {
     text-align: center;
-    margin-top: 1.5rem;
-    color: #666;
+    margin-top: 1rem;
+    color: #795548;
 }
 
 .cadastro-link a {
-    color: #2193b0;
+    color: #009688;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
+    font-weight: bold;
 }
 
 .cadastro-link a:hover {
-    color: #43cea2;
     text-decoration: underline;
+}
+
+.user-info {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #4CAF50;
+    font-weight: bold;
 }
 
 @media (max-width: 480px) {
@@ -164,3 +176,37 @@ body {
         top: -40px;
     }
 }
+
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+    const lembrar = document.getElementById('lembrar').checked;
+
+    if (email && senha) {
+        // Remove completamente os botões do DOM
+        const btn = document.querySelector('.login-btn');
+        const link = document.querySelector('.cadastro-link');
+        if (btn) btn.remove();
+        if (link) link.remove();
+
+        // Salva o login no localStorage
+        localStorage.setItem('ultimoLogin', JSON.stringify({
+            email: email,
+            lembrar: lembrar,
+            data: new Date().toISOString()
+        }));
+
+        // Cria e insere um elemento com o nome do usuário
+        const userInfo = document.createElement('p');
+        userInfo.classList.add('user-info');
+        userInfo.textContent = 'Bem-vindo, ' + email;
+        document.querySelector('.login-form').appendChild(userInfo);
+
+        // Opcional: redireciona após alguns segundos se desejar
+        // setTimeout(function() {
+        //     window.location.href = 'index.html';
+        // }, 2000);
+    }
+});

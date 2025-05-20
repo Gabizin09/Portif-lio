@@ -5,16 +5,30 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const senha = document.getElementById('senha').value;
     const lembrar = document.getElementById('lembrar').checked;
 
-    // Aqui você pode adicionar sua lógica de autenticação
-    // Por exemplo, enviar para um servidor ou verificar localmente
-
-    console.log('Tentativa de login:', { email, lembrar });
-
-    // Simulando um login bem-sucedido
-    // Substitua isto pela sua lógica real de autenticação
     if (email && senha) {
-        // Redirecionar para a página principal após login bem-sucedido
-        window.location.href = 'index.html';
+        // Remove completamente os botões do DOM
+        const btn = document.querySelector('.login-btn');
+        const link = document.querySelector('.cadastro-link');
+        if (btn) btn.remove();
+        if (link) link.remove();
+
+        // Salva o login no localStorage
+        localStorage.setItem('ultimoLogin', JSON.stringify({
+            email: email,
+            lembrar: lembrar,
+            data: new Date().toISOString()
+        }));
+
+        // Cria e insere um elemento com o nome do usuário
+        const userInfo = document.createElement('p');
+        userInfo.classList.add('user-info');
+        userInfo.textContent = 'Bem-vindo, ' + email;
+        document.querySelector('.login-form').appendChild(userInfo);
+
+        // Opcional: redirecionar após alguns segundos
+        setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 2000);
     }
 });
 
