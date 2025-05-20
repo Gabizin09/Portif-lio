@@ -2,18 +2,22 @@
 document.getElementById('cadastroForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const nome = document.getElementById('nome').value;
+    const cpf = document.getElementById('cpf').value;
+    const telefone = document.getElementById('telefone').value;
+    const idioma = document.getElementById('idioma').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
 
-    if (nome && email && senha) {
+    if (cpf && telefone && idioma && email && senha) {
         // Disable form inputs and button
-        const inputs = document.querySelectorAll('input, button');
+        const inputs = document.querySelectorAll('input, select, button');
         inputs.forEach(input => input.disabled = true);
 
         // Create user object
         const userData = {
-            nome: nome,
+            cpf: cpf,
+            telefone: telefone,
+            idioma: idioma,
             email: email,
             senha: senha
         };
@@ -26,20 +30,40 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
 
         // Save back to localStorage
         localStorage.setItem('users', JSON.stringify(users));
-
-        document.getElementById('mensagem').style.color = '#28a745';
-        document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso! Redirecionando para o login...';
         
-        // Redirect to login after 2 seconds
+        // Store email temporarily for confirmation page
+        sessionStorage.setItem('emailToConfirm', email);
+
+        document.getElementById('mensagem').style.color = '#ff3300';
+        document.getElementById('mensagem').textContent = 'Cadastro realizado! Redirecionando para confirmação...';
+        
+        // Redirect to confirmation page after 2 seconds
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'confirmar.html';
         }, 2000);
     } else {
-        document.getElementById('mensagem').style.color = '#dc3545';
+        document.getElementById('mensagem').style.color = '#ff3300';
         document.getElementById('mensagem').textContent = 'Por favor, preencha todos os campos.';
     }
 });
 
 document.getElementById('voltarBtn').addEventListener('click', function() {
-    window.location.href = 'index.html';
+    window.location.href = 'index.html';  // Changed from 'login.html' to 'index.html'
+});
+
+// Add input masks for CPF and phone number
+document.getElementById('cpf').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 11) {
+        value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        e.target.value = value;
+    }
+});
+
+document.getElementById('telefone').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 11) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        e.target.value = value;
+    }
 });
