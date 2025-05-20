@@ -4,36 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Busca de Empregos</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./styles/stlyes.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <header class="main-header">
+        <div class="header-container">
             <div class="logo">Inimigo do desemprego</div>
-            <div class="nav-links">
-                <a href="#" id="loginBtn">Login</a>
-                <a href="#" id="cadastroBtn">Cadastro</a>
-            </div>
-        </nav>
+            <nav class="nav-menu">
+                <div class="nav-links">
+                    <a href="login.html" class="nav-button">Entrar</a>
+                    <a href="cadastro.html" class="nav-button">Cadastro</a>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="search-section">
+    <main class="main-content">
+        <section class="hero-section">
             <h1>Encontre o emprego dos seus sonhos</h1>
-            <div class="search-container">
-                <input type="text" id="jobSearch" placeholder="Cargo ou palavra-chave">
-                <input type="text" id="locationSearch" placeholder="Localização">
-                <button id="searchBtn">Buscar</button>
-            </div>
+            <p class="subtitle">Milhares de vagas esperando por você</p>
+            
+            <form id="search-form" class="search-container">
+                <div class="search-inputs">
+                    <div class="input-group">
+                        <i class="search-icon">🔍</i>
+                        <input type="text" id="search-keyword" placeholder="Cargo ou palavra-chave" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="location-icon">📍</i>
+                        <input type="text" id="search-location" placeholder="Localização" required>
+                    </div>
+                    <button type="submit" class="search-button">Buscar Vagas</button>
+                </div>
+            </form>
         </section>
 
-        <section class="jobs-section">
+        <section class="results-section">
+            <div id="results" class="results-container"></div>
+        </section>
+
+        <section class="featured-jobs">
             <h2>Vagas em Destaque</h2>
-            <div class="jobs-container" id="jobsList">
+            <div class="jobs-grid" id="jobsList">
                 <!-- Jobs will be inserted here by JavaScript -->
             </div>
         </section>
     </main>
-    <script src="js/script.js"></script>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Inimigo do desemprego. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
