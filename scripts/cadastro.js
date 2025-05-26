@@ -85,12 +85,24 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Armazenar dados do usuário no localStorage
+        const user = {
+            nome,
+            cpf,
+            telefone,
+            email,
+            senha,
+            dataNascimento
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        console.log('Usuário cadastrado:', user);
+
         // Se passou por todas as validações
         mostrarMensagem('Cadastro realizado com sucesso!', 'success');
         
-        // Redirecionar após 2 segundos
+        // Redirecionar para home.html após 2 segundos
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'home.html';
         }, 2000);
     });
 
