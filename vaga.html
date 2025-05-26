@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Vaga</title>
+    <link rel="stylesheet" href="./styles/stlyes.css">
+    <link rel="stylesheet" href="./styles/vaga.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">Inimigo do Desemprego</div>
+            <nav class="nav-menu">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-button">Voltar</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="vaga-container">
+            <div id="vagaDetalhes" class="vaga-detalhes">
+                <!-- Detalhes da vaga serão inseridos aqui via JavaScript -->
+            </div>
+            
+            <form id="candidaturaForm" class="candidatura-form">
+                <h3>Complete sua candidatura</h3>
+                
+                <div class="form-group">
+                    <label for="curriculo">Currículo (PDF)</label>
+                    <input type="file" id="curriculo" name="curriculo" accept=".pdf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="carta">Carta de Apresentação</label>
+                    <textarea id="carta" name="carta" rows="6" placeholder="Conte-nos por que você seria ideal para essa vaga..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="pretensao">Pretensão Salarial</label>
+                    <input type="text" id="pretensao" name="pretensao" placeholder="R$ 0.000,00" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Enviar Candidatura</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="./scripts/vaga.js"></script>
+</body>
+</html>

@@ -241,4 +241,247 @@ button[type="submit"]:hover {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(33, 147, 176, 0.15);
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    margin: 2rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.voltar-btn {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.voltar-btn:hover {
+    transform: translateX(-5px);
+}
+
+.voltar-icon {
+    font-size: 1.2rem;
+}
+
+.cadastro-form h1 {
+    color: #185a9d;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Espaçamento especial para grupos específicos */
+.input-group.nome-field,
+.input-group.cpf-field,
+.input-group.telefone-field,
+.input-group.nascimento-field,
+.input-group.senha-field,
+.input-group.confirmar-senha-field {
+    margin-bottom: 2.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #2193b0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #f8f9fa;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #43cea2;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.1);
+}
+
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #666;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+.terms-group {
+    margin: 1.5rem 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 4px;
+    accent-color: #43cea2;
+}
+
+.checkbox-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.checkbox-text .link {
+    color: #2193b0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-text .link:hover {
+    color: #43cea2;
+    text-decoration: underline;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+.login-link a {
+    color: #2193b0;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.login-link a:hover {
+    color: #43cea2;
+    text-decoration: underline;
+}
+
+.mensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease-out;
+    display: none;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.mensagem.success {
+    background: #43cea2;
+    color: white;
+}
+
+.mensagem.error {
+    background: #ff4757;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .cadastro-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-group.full-width {
+        grid-column: auto;
+    }
+
+    .voltar-btn {
+        top: -40px;
+    }
 }
