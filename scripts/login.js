@@ -1,26 +1,39 @@
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    
-    const email = document.getElementById('email').value;
+
+    const email = document.getElementById('email').value.trim().toLowerCase();
     const senha = document.getElementById('senha').value;
-    const lembrar = document.getElementById('lembrar').checked;
 
-    // Recupera usuário salvo no cadastro
-    const user = JSON.parse(localStorage.getItem('user'));
+    // Recupera todos os usuários cadastrados
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    // Procura usuário com email e senha correspondentes
+    const user = usuarios.find(u => u.email === email && u.senha === senha);
 
-    if (user && email === user.email && senha === user.senha) {
-        // Login bem-sucedido
-        window.location.href = 'home.html';
+    let msg = document.getElementById('mensagem');
+    if (!msg) {
+        msg = document.createElement('div');
+        msg.id = 'mensagem';
+        msg.className = 'mensagem error';
+        document.getElementById('login-form').appendChild(msg);
+    }
+
+    if (user) {
+        // Salva usuário logado no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify({
+            nome: user.nome,
+            email: user.email
+        }));
+
+        msg.textContent = 'Login realizado com sucesso!';
+        msg.className = 'mensagem success';
+        msg.style.display = 'block';
+        setTimeout(() => {
+            msg.style.display = 'none';
+            window.location.href = 'home.html';
+        }, 1500);
     } else {
-        // Exibe mensagem de erro
-        let msg = document.getElementById('mensagem');
-        if (!msg) {
-            msg = document.createElement('div');
-            msg.id = 'mensagem';
-            msg.className = 'mensagem error';
-            document.getElementById('login-form').appendChild(msg);
-        }
         msg.textContent = 'E-mail ou senha incorretos!';
+        msg.className = 'mensagem error';
         msg.style.display = 'block';
         setTimeout(() => { msg.style.display = 'none'; }, 3000);
     }

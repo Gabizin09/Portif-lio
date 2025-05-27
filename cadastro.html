@@ -8,9 +8,21 @@
 </head>
 <body>
     <div class="cadastro-container">
+        <div class="banner-motivacional">
+            🚀 Dê o primeiro passo para sua nova carreira!<br>
+            <span class="banner-motivacional-sub">Cadastre-se e descubra oportunidades incríveis.</span>
+        </div>
         <a href="index.html" class="voltar-btn">
             <span class="voltar-icon">←</span> Voltar
         </a>
+        
+        <!-- Avatar e mensagem de boas-vindas -->
+        <div class="cadastro-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Avatar" class="cadastro-avatar">
+            <h1>Bem-vindo(a) ao Inimigos do Emprego!</h1>
+            <p class="subtitle">Crie sua conta e encontre as melhores oportunidades para sua carreira.</p>
+        </div>
+
         
         <form id="cadastroForm" class="cadastro-form">
             <h1>Criar Conta</h1>
@@ -20,7 +32,7 @@
                 <div class="input-group nome-field">
                     <label for="nome">Nome completo</label>
                     <input type="text" id="nome" name="nome" required 
-                           placeholder="Digite seu nome completo">
+                           placeholder="Ex: Maria da Silva">
                 </div>
 
                 <div class="input-group cpf-field">
@@ -32,26 +44,30 @@
                 <div class="input-group telefone-field">
                     <label for="telefone">Telefone</label>
                     <input type="tel" id="telefone" name="telefone" required 
-                           placeholder="(00) 00000-0000">
+                           placeholder="(11) 91234-5678">
                 </div>
 
                 <div class="input-group email-field">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" required 
-                           placeholder="seu@email.com">
+                           placeholder="exemplo@email.com">
                 </div>
 
                 <div class="input-group nascimento-field">
                     <label for="dataNascimento">Data de Nascimento</label>
                     <input type="date" id="dataNascimento" name="dataNascimento" required>
                 </div>
+            </div>
 
+            <hr class="form-divider">
+
+            <div class="form-grid">
                 <div class="input-group senha-field">
                     <label for="senha">Senha</label>
                     <div class="password-input">
                         <input type="password" id="senha" name="senha" required 
                                placeholder="Mínimo 8 caracteres">
-                        <button type="button" class="toggle-password">👁️</button>
+                        <button type="button" class="toggle-password" title="Mostrar/ocultar senha">👁️</button>
                     </div>
                 </div>
 
@@ -60,7 +76,7 @@
                     <div class="password-input">
                         <input type="password" id="confirmarSenha" name="confirmarSenha" required 
                                placeholder="Digite a senha novamente">
-                        <button type="button" class="toggle-password">👁️</button>
+                        <button type="button" class="toggle-password" title="Mostrar/ocultar senha">👁️</button>
                     </div>
                 </div>
             </div>
@@ -83,6 +99,10 @@
         </form>
 
         <div id="mensagem" class="mensagem"></div>
+
+        <div class="banner-final">
+            💡 Dica: Complete seu perfil para aumentar suas chances de conquistar o emprego dos sonhos!
+        </div>
     </div>
     <script src="./scripts/cadastro.js"></script>
 </body>

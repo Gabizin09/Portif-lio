@@ -225,6 +225,81 @@ body {
     color: white;
 }
 
+/* Banner motivacional */
+.banner-motivacional {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    padding: 1.2rem 2rem;
+    border-radius: 18px 18px 0 0;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    animation: bannerFadeIn 1s ease;
+}
+.banner-motivacional-sub {
+    font-size:1rem;
+    font-weight:400;
+}
+@keyframes bannerFadeIn {
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Avatar animado */
+.cadastro-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 12px #185a9d22;
+    margin-bottom: 0.3rem;
+    animation: pulseAvatar 2.5s infinite alternate;
+}
+@keyframes pulseAvatar {
+    0% { box-shadow: 0 0 0 0 #43cea244; }
+    100% { box-shadow: 0 0 24px 8px #43cea244; }
+}
+
+/* Mensagem motivacional */
+.motivacional {
+    color: #2193b0;
+    font-size: 1.08rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: fadeInMotivacional 1.2s;
+}
+@keyframes fadeInMotivacional {
+    from { opacity: 0; transform: scale(0.95);}
+    to { opacity: 1; transform: scale(1);}
+}
+
+/* Animação de entrada do formulário */
+.cadastro-form {
+    animation: slideInForm 1s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideInForm {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Banner inferior */
+.banner-final {
+    margin-top: 2rem;
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0 0 18px 18px;
+    text-align: center;
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: bannerFadeIn 1.2s;
+}
+
 @media (max-width: 768px) {
     .cadastro-container {
         margin: 1rem;

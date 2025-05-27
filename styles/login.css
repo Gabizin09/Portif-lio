@@ -7,110 +7,116 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .login-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(33, 147, 176, 0.15);
+    background: rgba(255, 255, 255, 0.22);
+    padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+    border-radius: 28px;
+    box-shadow: 0 12px 40px 0 rgba(33, 147, 176, 0.22), 0 2px 12px 0 rgba(67, 206, 162, 0.12);
     width: 100%;
-    max-width: 400px;
+    max-width: 410px;
     position: relative;
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.8s cubic-bezier(.4,0,.2,1);
+    backdrop-filter: blur(16px);
+    border: 2px solid rgba(255,255,255,0.28);
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
 }
+
 
 .voltar-btn {
     position: absolute;
-    top: -50px;
+    top: -48px;
     left: 0;
-    color: white;
+    color: #fff;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 1rem;
-    transition: transform 0.3s;
+    font-size: 1.08rem;
+    transition: transform 0.3s, color 0.3s;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #185a9d44;
 }
 
 .voltar-btn:hover {
-    transform: translateX(-5px);
+    transform: translateX(-7px) scale(1.07);
+    color: #43cea2;
 }
 
 .voltar-icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .login-form h1 {
     color: #185a9d;
-    font-size: 2rem;
+    font-size: 2.1rem;
     margin-bottom: 0.5rem;
     text-align: center;
+    letter-spacing: 1px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px #43cea244;
 }
 
 .subtitle {
-    color: #666;
+    color: #444;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.2rem;
+    font-size: 1.08rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
 }
 
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: #2193b0;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .input-group input {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
-    background: #f8f9fa;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 1px 6px rgba(33, 147, 176, 0.07);
+    font-weight: 500;
 }
 
 .input-group input:focus {
     border-color: #43cea2;
-    background: white;
+    background: #fff;
     outline: none;
-    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.1);
+    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.13);
 }
 
 .options {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.lembrar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #555;
-    cursor: pointer;
-}
-
-.lembrar input[type="checkbox"] {
-    accent-color: #43cea2;
+    font-size: 0.97rem;
 }
 
 .esqueci-senha {
     color: #2193b0;
     text-decoration: none;
     transition: color 0.3s;
+    font-weight: 600;
 }
 
 .esqueci-senha:hover {
@@ -120,32 +126,38 @@ body {
 
 .login-btn {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
     border-radius: 25px;
     background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
     color: white;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.13rem;
+    font-weight: 800;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 12px rgba(33, 147, 176, 0.13);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #185a9d22;
 }
 
 .login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 28px rgba(67, 206, 162, 0.18);
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
 }
 
 .cadastro-link {
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1.7rem;
     color: #666;
+    font-size: 1.03rem;
+    font-weight: 500;
 }
 
 .cadastro-link a {
     color: #2193b0;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     transition: color 0.3s;
 }
 
@@ -154,13 +166,93 @@ body {
     text-decoration: underline;
 }
 
+.mensagem {
+    margin-top: 1.3rem;
+    text-align: center;
+    font-size: 1.03rem;
+    padding: 0.8rem 1.1rem;
+    border-radius: 10px;
+    display: none;
+}
+
+.mensagem.success {
+    background: #e0f8f1;
+    color: #21936b;
+    border: 1.5px solid #43cea2;
+}
+
+.mensagem.error {
+    background: #ffeaea;
+    color: #b00020;
+    border: 1.5px solid #ffb3b3;
+}
+
+/* Banner motivacional */
+.banner-motivacional {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    padding: 1.1rem 2rem;
+    border-radius: 18px 18px 0 0;
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1.1rem;
+    animation: bannerFadeIn 1s ease;
+}
+.banner-motivacional-sub {
+    font-size:1rem;
+    font-weight:400;
+}
+@keyframes bannerFadeIn {
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+/* Mensagem motivacional */
+.motivacional {
+    color: #2193b0;
+    font-size: 1.05rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: fadeInMotivacional 1.2s;
+}
+@keyframes fadeInMotivacional {
+    from { opacity: 0; transform: scale(0.95);}
+    to { opacity: 1; transform: scale(1);}
+}
+/* Animação de entrada do formulário */
+.login-form {
+    animation: slideInForm 1s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideInForm {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+/* Banner inferior */
+.banner-final {
+    margin-top: 2rem;
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 0 0 18px 18px;
+    text-align: center;
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: bannerFadeIn 1.2s;
+}
+
 @media (max-width: 480px) {
     .login-container {
         margin: 1rem;
-        padding: 2rem;
+        padding: 1.1rem;
     }
-
     .voltar-btn {
-        top: -40px;
+        top: -36px;
+    }
+    .login-form h1 {
+        font-size: 1.5rem;
     }
 }
