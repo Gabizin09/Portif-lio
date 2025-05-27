@@ -5,16 +5,24 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const senha = document.getElementById('senha').value;
     const lembrar = document.getElementById('lembrar').checked;
 
-    // Aqui você pode adicionar sua lógica de autenticação
-    // Por exemplo, enviar para um servidor ou verificar localmente
+    // Recupera usuário salvo no cadastro
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    console.log('Tentativa de login:', { email, lembrar });
-
-    // Simulando um login bem-sucedido
-    // Substitua isto pela sua lógica real de autenticação
-    if (email && senha) {
-        // Redirecionar para a página principal após login bem-sucedido
+    if (user && email === user.email && senha === user.senha) {
+        // Login bem-sucedido
         window.location.href = 'home.html';
+    } else {
+        // Exibe mensagem de erro
+        let msg = document.getElementById('mensagem');
+        if (!msg) {
+            msg = document.createElement('div');
+            msg.id = 'mensagem';
+            msg.className = 'mensagem error';
+            document.getElementById('login-form').appendChild(msg);
+        }
+        msg.textContent = 'E-mail ou senha incorretos!';
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 3000);
     }
 });
 

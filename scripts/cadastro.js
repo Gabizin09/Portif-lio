@@ -1,33 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('cadastroForm');
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-    
+    const campoSenha = document.getElementById('senha');
+    const campoConfirmarSenha = document.getElementById('confirmarSenha');
+    const campoCPF = document.getElementById('cpf');
+    const campoTelefone = document.getElementById('telefone');
+
     // Máscara para CPF
-    const cpfInput = document.getElementById('cpf');
-    cpfInput.addEventListener('input', function(e) {
+    campoCPF.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
-        if (value.length <= 11) {
-            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-            e.target.value = value;
-        }
+        if (value.length > 11) value = value.slice(0, 11);
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = value;
     });
 
     // Máscara para telefone
-    const telefoneInput = document.getElementById('telefone');
-    telefoneInput.addEventListener('input', function(e) {
+    campoTelefone.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
-        if (value.length <= 11) {
-            if (value.length === 11) {
-                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            } else {
-                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-            }
-            e.target.value = value;
-        }
+        if (value.length > 11) value = value.slice(0, 11);
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+        e.target.value = value;
     });
 
-    // Toggle senha
-    togglePasswordButtons.forEach(button => {
+    // Toggle de visibilidade da senha
+    document.querySelectorAll('.toggle-password').forEach(button => {
         button.addEventListener('click', function() {
             const input = this.previousElementSibling;
             const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -36,16 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Função para verificar se o usuário já existe
+    function usuarioJaExiste(email) {
+        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+        return usuarios.some(user => user.email === email);
+    }
+
     // Validação do formulário
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const nome = document.getElementById('nome').value.trim();
-        const cpf = cpfInput.value.replace(/\D/g, '');
-        const telefone = telefoneInput.value.replace(/\D/g, '');
-        const email = document.getElementById('email').value.trim();
-        const senha = document.getElementById('senha').value;
-        const confirmarSenha = document.getElementById('confirmarSenha').value;
+        const cpf = campoCPF.value.replace(/\D/g, '');
+        const telefone = campoTelefone.value.replace(/\D/g, '');
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const senha = campoSenha.value;
+        const confirmarSenha = campoConfirmarSenha.value;
         const dataNascimento = document.getElementById('dataNascimento').value;
         const termos = document.getElementById('termos').checked;
 
@@ -70,6 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (usuarioJaExiste(email)) {
+            mostrarMensagem('Este e-mail já está cadastrado', 'error');
+            return;
+        }
+
         if (senha.length < 8) {
             mostrarMensagem('A senha deve ter pelo menos 8 caracteres', 'error');
             return;
@@ -85,22 +94,32 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Armazenar dados do usuário no localStorage
-        const user = {
+        // Criar objeto do usuário
+        const novoUsuario = {
+            id: Date.now(),
             nome,
             cpf,
             telefone,
             email,
-            senha,
-            dataNascimento
+            senha: btoa(senha), // Codificação básica
+            dataNascimento,
+            dataCadastro: new Date().toISOString()
         };
-        localStorage.setItem('user', JSON.stringify(user));
-        console.log('Usuário cadastrado:', user);
 
-        // Se passou por todas as validações
+        // Recuperar array de usuários existente ou criar novo
+        const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+        usuarios.push(novoUsuario);
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+        // Salvar usuário atual na sessão
+        sessionStorage.setItem('usuarioAtual', JSON.stringify({
+            id: novoUsuario.id,
+            nome: novoUsuario.nome,
+            email: novoUsuario.email
+        }));
+
         mostrarMensagem('Cadastro realizado com sucesso!', 'success');
-        
-        // Redirecionar para home.html após 2 segundos
+
         setTimeout(() => {
             window.location.href = 'home.html';
         }, 2000);
@@ -111,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mensagem.textContent = texto;
         mensagem.className = 'mensagem ' + tipo;
         mensagem.style.display = 'block';
-        
+
         setTimeout(() => {
             mensagem.style.display = 'none';
         }, 3000);
