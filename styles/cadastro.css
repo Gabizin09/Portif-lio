@@ -1,4 +1,246 @@
 body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(
+        225deg,
+        #43cea2 0%,
+        #185a9d 25%,
+        #2b5876 50%,
+        #4e4376 75%,
+        #43cea2 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add cosmic particles effect */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+body::before {
+    background: radial-gradient(circle at center, transparent 0%, rgba(67, 206, 162, 0.03) 100%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+body::after {
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+    animation: starfield 120s linear infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes starfield {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 0 40px rgba(67, 206, 162, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.form-container:hover::before {
+    left: 100%;
+}
+
+.form-container:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 
+        0 0 60px rgba(67, 206, 162, 0.3),
+        inset 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+h1 {
+    color: white;
+    text-shadow: 
+        0 0 10px rgba(67, 206, 162, 0.3),
+        0 0 20px rgba(67, 206, 162, 0.2),
+        0 0 30px rgba(67, 206, 162, 0.1);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    letter-spacing: 3px;
+    position: relative;
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(67, 206, 162, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(67, 206, 162, 0.5); }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    color: white;
+    font-weight: 500;
+}
+
+input, select {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    letter-spacing: 0.5px;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus, select:focus {
+    border-color: #43cea2;
+    box-shadow: 
+        0 0 25px rgba(67, 206, 162, 0.3),
+        inset 0 0 15px rgba(67, 206, 162, 0.1);
+    transform: scale(1.02);
+}
+
+input:hover, select:hover {
+    box-shadow: 0 0 15px rgba(67, 206, 162, 0.2);
+    border-color: rgba(67, 206, 162, 0.5);
+}
+
+button[type="submit"] {
+    background: linear-gradient(
+        45deg, 
+        #43cea2 0%, 
+        #185a9d 50%,
+        #43cea2 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientButton 6s ease infinite;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 30px rgba(67, 206, 162, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 40px rgba(67, 206, 162, 0.6);
+    letter-spacing: 3px;
+}
+
+#voltarBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #185a9d, #43cea2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(24, 90, 157, 0.3);
+}
+
+#voltarBtn:hover {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 30px rgba(67, 206, 162, 0.5);
+    letter-spacing: 2px;
+}
+
+#mensagem {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#mensagem.error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+#mensagem.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradientButton {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
     margin: 0;
     padding: 0;
     display: flex;
