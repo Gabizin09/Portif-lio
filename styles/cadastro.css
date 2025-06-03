@@ -31,11 +31,7 @@ body::before {
 }
 
 body::after {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle at 80% 80%, #ff3c3c 60%, transparent 100%);
-    bottom: -150px;
-    right: -150px;
+    display: none;
 }
 
 .cadastro-container {
@@ -60,28 +56,45 @@ body::after {
 }
 
 .voltar-btn {
-    position: absolute;
-    top: -48px;
-    left: 0;
-    color: white;
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    color: #185a9d;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 1.1rem;
-    transition: transform 0.3s;
+    font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 1px;
-    text-shadow: 0 2px 8px #185a9d44;
+    background: rgba(255,255,255,0.12);
+    padding: 0.7rem 1.5rem;
+    border-radius: 28px;
+    z-index: 100;
+    border: 2px solid #43cea2;
+    box-shadow: 0 2px 12px #185a9d22;
+    transition: 
+        background 0.3s,
+        color 0.3s,
+        border 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s;
+    text-shadow: 0 2px 8px #185a9d22;
+    backdrop-filter: blur(2px);
 }
 
 .voltar-btn:hover {
-    transform: translateX(-5px) scale(1.05);
+    background: rgba(67, 206, 162, 0.18);
     color: #43cea2;
+    border-color: #185a9d;
+    box-shadow: 0 4px 24px #43cea244;
+    transform: translateY(-2px) scale(1.05);
 }
 
 .voltar-icon {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    color: #43cea2;
+    margin-right: 0.3rem;
 }
 
 .cadastro-header {
@@ -204,6 +217,7 @@ body::after {
     color: #185a9d;
 }
 
+/* Checkbox e termos */
 .terms-group {
     margin: 1.7rem 0;
 }
@@ -236,6 +250,7 @@ body::after {
     text-decoration: underline;
 }
 
+/* Botão principal */
 .submit-btn {
     width: 100%;
     padding: 17px;
@@ -259,6 +274,7 @@ body::after {
     background: linear-gradient(90deg, #ff3c3c 0%, #185a9d 100%);
 }
 
+/* Link para login */
 .login-link {
     text-align: center;
     margin-top: 2.2rem;
@@ -278,6 +294,7 @@ body::after {
     text-decoration: underline;
 }
 
+/* Mensagem de feedback */
 .mensagem {
     position: fixed;
     top: 24px;
@@ -389,10 +406,6 @@ body::after {
     .cadastro-form {
         padding: 0.7rem 0;
     }
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem 0.7rem;
-    }
     .banner-motivacional,
     .banner-final {
         font-size: 1rem;
@@ -407,5 +420,362 @@ body::after {
     .submit-btn {
         font-size: 1rem;
         padding: 0.7rem;
+    }
+}
+
+/* Ajuste responsivo para o formulário maior */
+@media (max-width: 800px) {
+    .cadastro-container {
+        max-width: 98vw;
+        padding: 1.5rem 0.5rem;
+    }
+}
+
+/* --- LIMPEZA E AJUSTE: AZUL E VERDE CLARO, SEM HTML MISTURADO --- */
+
+/* Fundo e fonte */
+body {
+    background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Botão de voltar fixo no canto superior direito da página */
+.voltar-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    color: #185a9d;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: rgba(255,255,255,0.12);
+    padding: 0.7rem 1.5rem;
+    border-radius: 28px;
+    z-index: 100;
+    border: 2px solid #43cea2;
+    box-shadow: 0 2px 12px #185a9d22;
+    transition: 
+        background 0.3s,
+        color 0.3s,
+        border 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s;
+    text-shadow: 0 2px 8px #185a9d22;
+    backdrop-filter: blur(2px);
+}
+.voltar-btn:hover {
+    background: rgba(67, 206, 162, 0.18);
+    color: #43cea2;
+    border-color: #185a9d;
+    box-shadow: 0 4px 24px #43cea244;
+    transform: translateY(-2px) scale(1.05);
+}
+.voltar-icon {
+    font-size: 1.4rem;
+    color: #43cea2;
+    margin-right: 0.3rem;
+}
+@media (max-width: 600px) {
+    .voltar-btn {
+        top: 0.7rem;
+        right: 0.7rem;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Container do formulário */
+.cadastro-container {
+    background: rgba(255,255,255,0.97);
+    padding: 3.5rem 2.5rem;
+    border-radius: 36px;
+    box-shadow: 0 12px 36px rgba(67, 206, 162, 0.18), 0 2px 16px 0 rgba(24, 90, 157, 0.10);
+    width: 100%;
+    max-width: 700px;
+    margin: 3.5rem auto;
+    position: relative;
+    animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border: 2.5px solid #43cea2;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Banner motivacional */
+.banner-motivacional {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    color: #fff;
+    padding: 1.3rem 1.1rem;
+    border-radius: 22px 22px 0 0;
+    text-align: center;
+    font-size: 1.22rem;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    margin-bottom: 1.4rem;
+    animation: bannerFadeIn 1s ease;
+    box-shadow: 0 2px 16px #43cea222;
+    text-shadow: 0 2px 8px #185a9d44;
+}
+@keyframes bannerFadeIn {
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Formulário */
+.cadastro-form {
+    animation: slideInForm 1s cubic-bezier(.4,0,.2,1);
+    padding: 1rem 0;
+}
+@keyframes slideInForm {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+.cadastro-form h1 {
+    color: #185a9d;
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-shadow: 0 2px 12px #43cea233;
+}
+.subtitle {
+    color: #43cea2;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+/* Grid dos campos */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 2rem;
+    margin-bottom: 1.2rem;
+}
+@media (max-width: 700px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem 0.7rem;
+    }
+}
+.input-group {
+    position: relative;
+    margin-bottom: 0.7rem;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #185a9d;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+}
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #43cea2;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #f8f9fa;
+    font-weight: 500;
+    color: #185a9d;
+    box-shadow: 0 1px 10px #43cea211;
+}
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #185a9d;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #43cea222;
+}
+
+/* Botão de senha */
+.password-input {
+    position: relative;
+}
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.3rem;
+    color: #43cea2;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+}
+.toggle-password:hover {
+    opacity: 1;
+    color: #185a9d;
+}
+
+/* Checkbox e termos */
+.terms-group {
+    margin: 1.2rem 0;
+}
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    margin-top: 4px;
+    accent-color: #43cea2;
+}
+.checkbox-text {
+    color: #185a9d;
+    font-size: 1.05rem;
+}
+.checkbox-text .link {
+    color: #43cea2;
+    text-decoration: none;
+    font-weight: 600;
+}
+.checkbox-text .link:hover {
+    color: #185a9d;
+    text-decoration: underline;
+}
+
+/* Botão principal */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 32px;
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    color: white;
+    font-size: 1.18rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1.2px;
+    box-shadow: 0 2px 16px #43cea222;
+    text-shadow: 0 2px 8px #185a9d22;
+    margin-top: 1.2rem;
+}
+.submit-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 32px #43cea233;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+}
+
+/* Link para login */
+.login-link {
+    text-align: center;
+    margin-top: 1.2rem;
+    color: #185a9d;
+    font-size: 1.08rem;
+}
+.login-link a {
+    color: #43cea2;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+.login-link a:hover {
+    color: #185a9d;
+    text-decoration: underline;
+}
+
+/* Mensagem de feedback */
+.mensagem {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    padding: 1.1rem 2.2rem;
+    border-radius: 12px;
+    animation: slideIn 0.3s ease-out;
+    display: none;
+    font-size: 1.13rem;
+    font-weight: 700;
+    box-shadow: 0 2px 16px #43cea222;
+    z-index: 1000;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+.mensagem.success {
+    background: #185a9d;
+    color: white;
+    border: 2px solid #43cea2;
+}
+.mensagem.error {
+    background: #fff;
+    color: #185a9d;
+    border: 2px solid #43cea2;
+}
+
+/* Banner inferior */
+.banner-final {
+    margin-top: 1.2rem;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    padding: 1.1rem 1.3rem;
+    border-radius: 0 0 22px 22px;
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+    animation: bannerFadeIn 1.2s;
+    text-shadow: 0 2px 8px #185a9d44;
+}
+
+/* Responsivo para container */
+@media (max-width: 900px) {
+    .cadastro-container {
+        max-width: 98vw;
+        padding: 1.2rem 0.4rem;
+        gap: 1.2rem;
+    }
+    .cadastro-form {
+        padding: 0.7rem 0;
+    }
+    .banner-motivacional,
+    .banner-final {
+        font-size: 1rem;
+        padding: 0.7rem 0.2rem;
+    }
+    .cadastro-form h1 {
+        font-size: 1.2rem;
+    }
+    .input-group label {
+        font-size: 1rem;
+    }
+    .submit-btn {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+}
+
+/* Ajuste responsivo para o formulário maior */
+@media (max-width: 800px) {
+    .cadastro-container {
+        max-width: 98vw;
+        padding: 1.5rem 0.5rem;
     }
 }
