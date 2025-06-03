@@ -1,320 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger CIA - Lanches & Porções</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Busca de Empregos</title>
+    <link rel="stylesheet" href="./styles/stlyes.css">
 </head>
 <body>
-    <!-- Logo Section -->
-    <div class="container text-center py-4">
-        <img src="./logo.png" alt="Burger CIA Logo" class="logo-main">
-        <h1 class="mt-3">Burger CIA</h1>
-        <p class="lead">Os melhores lanches e porções da região!</p>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#cardapio">Cardápio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
-                            <i class="bi bi-cart"></i> Carrinho <span class="badge bg-danger" id="cartCount">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Category Filters -->
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-center flex-wrap gap-2">
-                    <button class="btn btn-outline-primary active" data-category="all">Todos</button>
-                    <button class="btn btn-outline-primary" data-category="burgers">Lanches</button>
-                    <button class="btn btn-outline-primary" data-category="portions">Porções</button>
-                    <button class="btn btn-outline-primary" data-category="drinks">Bebidas</button>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">Inimigos do Emprego</div>
+            <nav class="nav-menu">
+                <div class="nav-links">
+                    <a href="login.html" class="nav-button">Entrar</a>
+                    <a href="cadastro.html" class="nav-button destaque">Cadastre-se</a>
                 </div>
-            </div>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <!-- Products Section -->
-    <div class="container py-4">
-        <div class="row" id="productsContainer">
-            <!-- Products will be loaded dynamically -->
-        </div>
-    </div>
+    <main class="main-content">
+        <!-- Banner motivacional -->
+        <section class="banner-motivacional" id="bannerMotivacional">
+            <span class="banner-icon">🚀</span>
+            <span class="banner-text" id="bannerText">
+                Sua nova oportunidade está a um clique! <b>Cadastre-se</b> e encontre o emprego ideal.
+            </span>
+        </section>
 
-    <!-- Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Carrinho de Compras</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="cartItems"></div>
-                    <div class="text-end mt-3">
-                        <strong>Total: R$ <span id="cartTotal">0.00</span></strong>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="checkoutBtn">Finalizar Pedido</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script>
-        const products = {
-            burgers: [
-                {
-                    id: 1,
-                    name: 'X-Burger',
-                    price: 25.90,
-                    description: 'Pão, hambúrguer, queijo, alface, tomate',
-                    category: 'burgers',
-                    image: './xburger.jpg'
-                },
-                {
-                    id: 2,
-                    name: 'X-Bacon Cheddar',
-                    price: 30.00,
-                    description: 'Pão, hambúrguer, bacon, cheddar, tomate, maionese',
-                    category: 'burgers',
-                    image : './OIP.jpg'
-                },
-                {
-                    id: 3,
-                    name: 'KiDelicia',
-                    price: 28.00,
-                    description: 'Pão, hambúrguer, presunto, ovo, maionese, milho, queijo, alface, tomate',
-                    category: 'burgers',
-                    image: './Kidelicia.jpg'
-                },
-                {
-                    id: 4,
-                    name: 'Americano',
-                    price: 22.00,
-                    description: 'Pão, maionese, hambúrguer, presunto, 2 ovo, queijo, alface, tomate',
-                    category: 'burgers',
-                     image: './Ame.jpg'
-                },
-                {
-                    id: 5,
-                    name: 'X-Bacon',
-                    price: 28.90,
-                    description: 'Pão, hambúrguer, bacon, queijo, alface, tomate',
-                    category: 'burgers',
-                     image: './bacon.jpg'
-                },
-                {
-                    id: 6,
-                    name: 'X-Tudo',
-                    price: 32.90,
-                    description: 'Pão, 2 hambúrgueres, bacon, queijo, ovo, alface, tomate',
-                    category: 'burgers',
-                     image: './tudo.jpg'
-                }
-            ],
-            portions: [
-                {
-                    id: 7,
-                    name: 'Batata Frita',
-                    price: 19.90,
-                    description: 'Porção de batatas fritas crocantes (300g)',
-                    category: 'portions',
-                     image: './frita.jpg'
-                },
-                {
-                    id: 8,
-                    name: 'Frango a Passarinho',
-                    price: 34.00,
-                    description: 'Frango com molho especal',
-                    category: 'portions',
-                     image: './bird.jpg'
-                },
-                {
-                    id: 9,
-                    name: 'Mista Frango',
-                    price: 60.00,
-                    description: 'Batata com Filé de Frango e pão na chapa',
-                    category: 'portions',
-                     image: './chapa.jpg'
-                }
-            ],
-            drinks: [
-                {
-                    id: 10,
-                    name: 'Coca-Cola',
-                    price: 11.00,
-                    description: '(Coca-Cola 2 Litros)',
-                    category: 'drinks',
-                     image: './coca.jpg'
-                },
-                {
-                    id: 11,
-                    name: 'Guárana',
-                    price: 9.00,
-                    description: '(Guárana 2 Litros)',
-                    category: 'drinks',
-                     image: './Refrigerante-Guaraná-Antarctica-2l.png'
-                },
-                {
-                    id: 12,
-                    name: 'Pepsi',
-                    price: 10.00,
-                    description: '(Pepsi 2 Litros)',
-                    category: 'drinks',
-                     image: './pep.jpg'
-                },
-                {
-                    id: 14,
-                    name: 'Suco Natural c/ àgua',
-                    price: 9.50,
-                    description: 'Laranja, Limão, Morango, Melão, Abacaxi, Abacaxi c/ Hortelã (500ml)',
-                    category: 'drinks',
-                     image: './suco.jpg'
-                },
-                {
-                    id: 15,
-                    name: 'Suco Natural c/ leite',
-                    price: 10.50,
-                    description: 'Laranja, Limão, Morango, Melão, Abacaxi, Abacaxi c/ Hortelã (500ml)',
-                    category: 'drinks',
-                     image: './leite.jpg'
-                }
-            ]
-        };
-
-        let cart = [];
-        let currentCategory = 'all';
-
-        function loadProducts(category = 'all') {
-            const container = document.getElementById('productsContainer');
-            let items = [];
+        <section class="hero-section">
+            <h1>
+                <span class="hero-icon">💼</span>
+                Encontre o emprego dos seus sonhos
+            </h1>
+            <p class="subtitle">Milhares de vagas esperando por você em todo o Brasil</p>
             
-            if (category === 'all') {
-                Object.values(products).forEach(categoryProducts => {
-                    items = [...items, ...categoryProducts];
-                });
-            } else {
-                items = products[category] || [];
-            }
+            <form id="search-form" class="search-container">
+                <div class="search-inputs">
+                    <div class="input-group">
+                        <i class="search-icon">🔍</i>
+                        <input type="text" id="search-keyword" placeholder="Cargo, palavra-chave ou empresa" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="location-icon">📍</i>
+                        <input type="text" id="search-location" placeholder="Cidade, estado ou remoto" required>
+                    </div>
+                    <button type="submit" class="search-button">Buscar Vagas</button>
+                </div>
+            </form>
             
-            container.innerHTML = items.map(product => `
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="${product.image}" 
-                             class="card-img-top product-img" 
-                             alt="${product.name}"> 
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.description}</p>
-                            <p class="card-text mt-auto"><strong>R$ ${product.price.toFixed(2)}</strong></p>
-                            <button class="btn btn-primary" onclick="addToCart(${product.id})">
-                                Adicionar ao Carrinho
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function addToCart(productId) {
-            let product = null;
-            Object.values(products).some(category => {
-                product = category.find(p => p.id === productId);
-                return product;
-            });
+        </section>
 
-            if (!product) return;
+        <section class="results-section">
+            <div id="results" class="results-container"></div>
+        </section>
 
-            const existingItem = cart.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            updateCartDisplay();
-        }
-
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            const cartCount = document.getElementById('cartCount');
-            const cartTotal = document.getElementById('cartTotal');
-
-            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-            cartItems.innerHTML = cart.map(item => `
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div>
-                        ${item.name} x ${item.quantity}
-                        <button class="btn btn-sm btn-danger ms-2" onclick="removeFromCart(${item.id})">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                    <div>R$ ${(item.price * item.quantity).toFixed(2)}</div>
-                </div>
-            `).join('');
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = total.toFixed(2);
-        }
-
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartDisplay();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProducts();
-
-            document.querySelectorAll('[data-category]').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    document.querySelectorAll('[data-category]').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    e.target.classList.add('active');
-                    loadProducts(e.target.dataset.category);
-                });
-            });
-
-            document.getElementById('checkoutBtn').addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Seu carrinho está vazio!');
-                    return;
-                }
-                alert('Pedido finalizado! Total: R$ ' + document.getElementById('cartTotal').textContent);
-                cart = [];
-                updateCartDisplay();
-            });
-        });
-    </script>
+        <section class="featured-jobs">
+            <h2>Vagas em Destaque</h2>
+            <div class="jobs-grid" id="jobsList">
+                <!-- Jobs will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </main>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <span>© 2025 Inimigos do Emprego — Conectando talentos e oportunidades</span>
+        </div>
+    </footer>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
