@@ -6,23 +6,49 @@
 }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    /* Novo fundo: degradê roxo-azul com detalhes */
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 50%, #0f2027 100%);
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Detalhes: gradientes radiais e linhas */
+    background:
+        radial-gradient(circle at 25% 30%, rgba(255, 94, 98, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(58, 141, 222, 0.18) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(255,94,98,0.07) 0 2px, transparent 2px 20px),
+        repeating-linear-gradient(-45deg, rgba(58,141,222,0.07) 0 2px, transparent 2px 20px);
+    z-index: -1;
+    pointer-events: none;
+    animation: fundoAnimado 18s linear infinite;
+}
+
+@keyframes fundoAnimado {
+    0% { background-position: 0% 0%, 100% 100%, 0 0, 0 0; }
+    100% { background-position: 100% 100%, 0% 0%, 100px 100px, -100px -100px; }
 }
 
 /* Header e Navegação */
 .main-header {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 8, 90, 0.95);
     padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 16px rgba(58, 141, 222, 0.15);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    border-bottom: 2px solid rgba(255,94,98,0.08);
 }
 
 .header-container {
@@ -35,10 +61,12 @@ body {
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
-    color: #185a9d;
+    color: #3a8dde; /* Changed to match background gradient */
     text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .nav-menu {
@@ -51,19 +79,26 @@ body {
     gap: 1rem;
 }
 
-.nav-button {
+.nav-button,
+.search-button,
+.apply-btn {
     padding: 0.8rem 1.5rem;
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
     color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(30, 8, 90, 0.13);
 }
 
-.nav-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+.nav-button:hover,
+.search-button:hover,
+.apply-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 18px rgba(58, 141, 222, 0.18);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
 }
 
 /* Main Content */
@@ -80,24 +115,27 @@ body {
 }
 
 .hero-section h1 {
-    font-size: 2.5rem;
-    color: white;
+    font-size: 2.7rem;
+    color: #fff;
     margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 4px 12px rgba(58, 141, 222, 0.25);
+    letter-spacing: 1px;
 }
 
 .subtitle {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: #3a8dde;
     margin-bottom: 2rem;
+    text-shadow: 0 2px 8px rgba(30,8,90,0.15);
 }
 
 /* Search Form */
 .search-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 8, 90, 0.92);
     padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(58, 141, 222, 0.13);
+    border: 1.5px solid rgba(255,94,98,0.09);
 }
 
 .search-inputs {
@@ -118,38 +156,44 @@ body {
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
+    color: #ff5e62;
 }
 
 .input-group input {
     width: 100%;
     padding: 1rem 1rem 1rem 2.5rem;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #1e085a;
     border-radius: 25px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: rgba(255,255,255,0.07);
+    color: #fff;
 }
 
 .input-group input:focus {
-    border-color: #43cea2;
+    border-color: #3a8dde;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(67, 206, 162, 0.1);
+    box-shadow: 0 0 0 3px rgba(58,141,222,0.13);
+    background: rgba(30,8,90,0.13);
 }
 
-.search-button {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 150px;
+.input-group input:hover {
+    border-color: #3a8dde;
+    background: rgba(30,8,90,0.1);
 }
 
-.search-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+/* Placeholder color */
+.input-group input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+/* Autofill styles */
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 1000px #1e085a inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Results Section */
@@ -159,10 +203,12 @@ body {
 }
 
 .results-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 8, 90, 0.92);
     border-radius: 15px;
     padding: 1rem;
     margin-top: 2rem;
+    box-shadow: 0 4px 18px rgba(58, 141, 222, 0.10);
+    border: 1.5px solid rgba(255,94,98,0.09);
 }
 
 /* Featured Jobs */
@@ -173,10 +219,11 @@ body {
 }
 
 .featured-jobs h2 {
-    color: white;
+    color: #3a8dde;
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .jobs-grid {
@@ -187,16 +234,19 @@ body {
 }
 
 .job-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255,255,255,0.10);
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 16px rgba(33, 147, 176, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(58, 141, 222, 0.13);
+    border: 1.5px solid rgba(255,94,98,0.09);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    color: #fff;
 }
 
 .job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 22px rgba(33, 147, 176, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 22px rgba(255,94,98,0.18);
+    background: rgba(58, 141, 222, 0.13);
 }
 
 .job-header {
@@ -207,13 +257,15 @@ body {
 }
 
 .job-title {
-    color: #185a9d;
+    color: #3a8dde;
     font-size: 1.2rem;
     margin: 0;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .job-type {
-    background: #43cea2;
+    background: #3a8dde;
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
@@ -226,16 +278,16 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    color: #666;
+    color: #e0e0e0;
 }
 
 .job-location {
     font-size: 0.9rem;
-    color: #666;
+    color: #b0b0b0;
 }
 
 .job-salary {
-    color: #2193b0;
+    color: #3a8dde;
     font-weight: 600;
     margin-bottom: 1rem;
     padding: 0.5rem 0;
@@ -244,7 +296,7 @@ body {
 }
 
 .job-description {
-    color: #555;
+    color: #e0e0e0;
     margin-bottom: 1rem;
     line-height: 1.5;
 }
@@ -252,13 +304,14 @@ body {
 .job-details {
     margin: 1rem 0;
     padding: 1rem;
-    background: rgba(67, 206, 162, 0.05);
+    background: rgba(58, 141, 222, 0.08);
     border-radius: 8px;
 }
 
 .job-details h4 {
-    color: #185a9d;
+    color: #3a8dde;
     margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .job-details ul {
@@ -269,14 +322,20 @@ body {
 
 .job-details li {
     padding: 0.3rem 0;
-    color: #666;
+    color: #e0e0e0;
     font-size: 0.9rem;
 }
 
 .job-details li:before {
     content: "✓";
-    color: #43cea2;
+    /* Change from #ff5e62 to match background gradient */
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-right: 0.5rem;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .apply-btn {
@@ -284,34 +343,139 @@ body {
     padding: 0.8rem;
     border: none;
     border-radius: 25px;
-    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    box-shadow: 0 2px 8px rgba(30, 8, 90, 0.15);
 }
 
 .apply-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 15px rgba(58, 141, 222, 0.18);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
 }
 
 .no-results {
     text-align: center;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 8, 90, 0.92);
     border-radius: 12px;
     margin: 2rem 0;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(58, 141, 222, 0.10);
 }
 
 .no-results h3 {
-    color: #185a9d;
+    color: #3a8dde;
     margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
 .no-results p {
-    color: #666;
+    color: #e0e0e0;
 }
+
+/* Estilos para o sistema de rolagem */
+html {
+    scroll-behavior: smooth;
+}
+
+section.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-down-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.scroll-down-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
+}
+
+/* Botão para rolar até o final */
+.scroll-to-bottom {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-to-bottom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
+}
+
+/* Botão para subir ao topo */
+/* .scroll-to-top {
+    position: fixed;
+    bottom: 90px; /* Posicionado acima do botão scroll-to-bottom 
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
+} */
 
 /* Responsividade */
 @media (max-width: 768px) {

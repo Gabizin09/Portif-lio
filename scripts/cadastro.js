@@ -1,112 +1,318 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('cadastroForm');
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+    const cadastroForm = document.getElementById('cadastroForm');
     
-    // Máscara para CPF
-    const cpfInput = document.getElementById('cpf');
-    cpfInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length <= 11) {
-            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-            e.target.value = value;
+    cadastroForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        // Validações
+        if (password !== confirmPassword) {
+            alert('As senhas não coincidem!');
+            return;
         }
+        
+        if (password.length < 6) {
+            alert('A senha deve ter pelo menos 6 caracteres!');
+            return;
+        }
+        
+        // Criar objeto com dados do usuário
+        const userData = {
+            nome: nome,
+            email: email,
+            password: password,
+            telefone: telefoneInput.value,
+            cpf: cpfInput.value,
+            dataNascimento: dataNascimentoInput.value
+        };
+        
+        // Salvar no localStorage
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = 'login.html';
     });
-
-    // Máscara para telefone
+    
+    // Formatação do telefone
     const telefoneInput = document.getElementById('telefone');
+
     telefoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
+        let value = e.target.value;
+        
+        // Remove tudo que não é número
+        value = value.replace(/\D/g, '');
+        
+        // Aplica a máscara (DD) XXXXX-XXXX
         if (value.length <= 11) {
-            if (value.length === 11) {
-                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            } else {
-                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-            }
-            e.target.value = value;
+            value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+        }
+        
+        // Atualiza o valor do input
+        e.target.value = value;
+    });
+
+    // Validação do telefone
+    telefoneInput.addEventListener('blur', function(e) {
+        const value = e.target.value.replace(/\D/g, '');
+        if (value.length !== 11) {
+            telefoneInput.setCustomValidity('Digite um número de telefone válido com DDD');
+        } else {
+            telefoneInput.setCustomValidity('');
         }
     });
 
-    // Toggle senha
-    togglePasswordButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const input = this.previousElementSibling;
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+    // Formatação do CPF
+    const cpfInput = document.getElementById('cpf');
+
+    cpfInput.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Remove tudo que não é número
+        value = value.replace(/\D/g, '');
+        
+        // Aplica a máscara XXX.XXX.XXX-XX
+        if (value.length <= 11) {
+            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+        }
+        
+        // Atualiza o valor do input
+        e.target.value = value;
+    });
+
+    // Validação do CPF
+    cpfInput.addEventListener('blur', function(e) {
+        const value = e.target.value.replace(/\D/g, '');
+        if (value.length !== 11) {
+            cpfInput.setCustomValidity('Digite um CPF válido');
+        } else if (!validaCPF(value)) {
+            cpfInput.setCustomValidity('CPF inválido');
+        } else {
+            cpfInput.setCustomValidity('');
+        }
+    });
+
+    // Função para validar CPF
+    function validaCPF(cpf) {
+        if (cpf.length !== 11) return false;
+        
+        // Elimina CPFs inválidos conhecidos
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
+        
+        // Valida 1o dígito
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+            soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let digito = 11 - (soma % 11);
+        if (digito > 9) digito = 0;
+        if (digito !== parseInt(cpf.charAt(9))) return false;
+        
+        // Valida 2o dígito
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+            soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        digito = 11 - (soma % 11);
+        if (digito > 9) digito = 0;
+        if (digito !== parseInt(cpf.charAt(10))) return false;
+        
+        return true;
+    }
+
+    // Formatação da Data de Nascimento
+    const dataNascimentoInput = document.getElementById('dataNascimento');
+
+    dataNascimentoInput.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Remove tudo que não é número
+        value = value.replace(/\D/g, '');
+        
+        // Aplica a máscara DD/MM/AAAA
+        if (value.length <= 8) {
+            value = value.replace(/^(\d{2})(\d{2})(\d{4}).*/, '$1/$2/$3');
+        }
+        
+        // Atualiza o valor do input
+        e.target.value = value;
+    });
+
+    // Validação da Data de Nascimento
+    dataNascimentoInput.addEventListener('blur', function(e) {
+        const value = e.target.value;
+        const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+        
+        if (!regex.test(value)) {
+            dataNascimentoInput.setCustomValidity('Digite uma data válida no formato DD/MM/AAAA');
+            return;
+        }
+        
+        const [, dia, mes, ano] = value.match(regex);
+        const data = new Date(ano, mes - 1, dia);
+        const hoje = new Date();
+        const idade = hoje.getFullYear() - data.getFullYear();
+        
+        // Verifica se é uma data válida
+        if (data.getDate() != dia || data.getMonth() + 1 != mes || data.getFullYear() != ano) {
+            dataNascimentoInput.setCustomValidity('Data inválida');
+        }
+        // Verifica idade mínima de 18 anos
+        else if (idade < 18) {
+            dataNascimentoInput.setCustomValidity('Você deve ter pelo menos 18 anos');
+        }
+        // Verifica se a data não é futura
+        else if (data > hoje) {
+            dataNascimentoInput.setCustomValidity('A data não pode ser futura');
+        }
+        else {
+            dataNascimentoInput.setCustomValidity('');
+        }
+    });
+
+    // Formatação e validação do nome
+    const nomeInput = document.getElementById('nome');
+
+    nomeInput.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Remove números e caracteres especiais
+        value = value.replace(/[0-9!@#$%^&*(),.?":{}|<>]/g, '');
+        
+        // Capitaliza as primeiras letras
+        value = value.replace(/\b\w/g, letter => letter.toUpperCase());
+        
+        // Atualiza o valor do input
+        e.target.value = value;
+    });
+
+    nomeInput.addEventListener('blur', function(e) {
+        const value = e.target.value.trim();
+        const names = value.split(' ').filter(name => name.length > 0);
+        
+        if (names.length < 2) {
+            nomeInput.setCustomValidity('Digite seu nome completo');
+        } else if (value.length < 6) {
+            nomeInput.setCustomValidity('Nome muito curto');
+        } else {
+            nomeInput.setCustomValidity('');
+        }
+    });
+
+    // Modal para os termos
+    const termsLinks = document.querySelectorAll('.terms-link');
+
+    // Criar modal
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-text"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Conteúdo dos termos
+    const termsContent = {
+        terms: `
+            <h2>Termos de Uso</h2>
+            <p>1. Ao utilizar nossos serviços, você concorda em:</p>
+            <ul>
+                <li>Fornecer informações verdadeiras e precisas</li>
+                <li>Manter seus dados atualizados</li>
+                <li>Não usar o serviço para fins ilegais</li>
+                <li>Respeitar os direitos de outros usuários</li>
+            </ul>
+            <p>2. Nos reservamos o direito de:</p>
+            <ul>
+                <li>Modificar ou encerrar o serviço a qualquer momento</li>
+                <li>Suspender contas que violem nossos termos</li>
+            </ul>
+        `,
+        privacy: `
+            <h2>Política de Privacidade</h2>
+            <p>1. Coletamos os seguintes dados:</p>
+            <ul>
+                <li>Nome completo</li>
+                <li>Email</li>
+                <li>Telefone</li>
+                <li>CPF</li>
+                <li>Data de nascimento</li>
+            </ul>
+            <p>2. Seus dados são utilizados para:</p>
+            <ul>
+                <li>Identificação no sistema</li>
+                <li>Comunicação importante</li>
+                <li>Melhorar nossos serviços</li>
+            </ul>
+            <p>3. Seus dados são protegidos e não são compartilhados com terceiros.</p>
+        `
+    };
+
+    // Event listeners para os links de termos
+    termsLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = link.dataset.terms;
+            const modalText = modal.querySelector('.modal-text');
+            modalText.innerHTML = termsContent[type];
+            modal.style.display = 'flex';
         });
     });
 
-    // Validação do formulário
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nome = document.getElementById('nome').value.trim();
-        const cpf = cpfInput.value.replace(/\D/g, '');
-        const telefone = telefoneInput.value.replace(/\D/g, '');
-        const email = document.getElementById('email').value.trim();
-        const senha = document.getElementById('senha').value;
-        const confirmarSenha = document.getElementById('confirmarSenha').value;
-        const dataNascimento = document.getElementById('dataNascimento').value;
-        const termos = document.getElementById('termos').checked;
-
-        // Validações
-        if (nome.length < 3) {
-            mostrarMensagem('O nome deve ter pelo menos 3 caracteres', 'error');
-            return;
-        }
-
-        if (cpf.length !== 11) {
-            mostrarMensagem('CPF inválido', 'error');
-            return;
-        }
-
-        if (telefone.length < 10) {
-            mostrarMensagem('Telefone inválido', 'error');
-            return;
-        }
-
-        if (!validarEmail(email)) {
-            mostrarMensagem('E-mail inválido', 'error');
-            return;
-        }
-
-        if (senha.length < 8) {
-            mostrarMensagem('A senha deve ter pelo menos 8 caracteres', 'error');
-            return;
-        }
-
-        if (senha !== confirmarSenha) {
-            mostrarMensagem('As senhas não coincidem', 'error');
-            return;
-        }
-
-        if (!termos) {
-            mostrarMensagem('Você deve aceitar os termos de uso', 'error');
-            return;
-        }
-
-        // Se passou por todas as validações
-        mostrarMensagem('Cadastro realizado com sucesso!', 'success');
-        
-        // Redirecionar após 2 segundos
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 2000);
+    // Fechar modal
+    modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.style.display = 'none';
     });
 
-    function mostrarMensagem(texto, tipo) {
-        const mensagem = document.getElementById('mensagem');
-        mensagem.textContent = texto;
-        mensagem.className = 'mensagem ' + tipo;
-        mensagem.style.display = 'block';
-        
-        setTimeout(() => {
-            mensagem.style.display = 'none';
-        }, 3000);
-    }
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 
-    function validarEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
+    // Adicionar validação dos checkboxes no submit do form
+    cadastroForm.addEventListener('submit', function(e) {
+        if (!document.getElementById('termsCheck').checked || 
+            !document.getElementById('privacyCheck').checked) {
+            e.preventDefault();
+            alert('Você precisa aceitar os Termos de Uso e a Política de Privacidade');
+            return;
+        }
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        // Validações
+        if (password !== confirmPassword) {
+            alert('As senhas não coincidem!');
+            return;
+        }
+        
+        if (password.length < 6) {
+            alert('A senha deve ter pelo menos 6 caracteres!');
+            return;
+        }
+        
+        // Criar objeto com dados do usuário
+        const userData = {
+            nome: nome,
+            email: email,
+            password: password,
+            telefone: telefoneInput.value,
+            cpf: cpfInput.value,
+            dataNascimento: dataNascimentoInput.value
+        };
+        
+        // Salvar no localStorage
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = 'login.html';
+    });
 });

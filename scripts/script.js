@@ -199,5 +199,99 @@ function displaySearchResults(results) {
     `).join('');
 }
 
+// Função utilitária para animar elementos com a classe .slide-in-up ao entrarem na tela
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.slide-in-up');
+    const windowBottom = window.innerHeight + window.scrollY;
+
+    elements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top + window.scrollY;
+        if (windowBottom > elementTop + 60) {
+            el.style.opacity = 1;
+            el.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+// Inicializa a opacidade e posição dos elementos animáveis
+function initSlideInUp() {
+    document.querySelectorAll('.slide-in-up').forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(40px)';
+        el.style.transition = 'opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+    });
+    animateOnScroll();
+}
+
+// Função para adicionar efeito de deslize suave
+function addSlideEffect() {
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(50px)';
+        section.style.transition = 'all 0.8s ease-out';
+    });
+
+    const revealSection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const sectionObserver = new IntersectionObserver(revealSection, {
+        root: null,
+        threshold: 0.15
+    });
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+}
+
+// Adicionar o efeito quando a página carregar
+document.addEventListener('DOMContentLoaded', addSlideEffect);
+
+// Ativa o efeito ao carregar e ao rolar a página
+window.addEventListener('DOMContentLoaded', initSlideInUp);
+window.addEventListener('scroll', animateOnScroll);
+
 // Carregar vagas em destaque quando a página carregar
 document.addEventListener('DOMContentLoaded', displayFeaturedJobs);
+
+// Remove as funções e listeners desnecessários
+// Apenas mantém a funcionalidade de rolagem suave do mouse
+function addSmoothMouseScroll() {
+    let isScrolling = false;
+    const scrollStep = 200; // Aumentado de 100 para 200 pixels por scroll
+
+    window.addEventListener('wheel', (event) => {
+        event.preventDefault();
+
+        if (!isScrolling) {
+            isScrolling = true;
+
+            const direction = event.deltaY > 0 ? 1 : -1;
+            const targetScroll = window.scrollY + (direction * scrollStep);
+
+            window.scrollTo({
+                top: targetScroll,
+                behavior: 'smooth'
+            });
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 200); // Reduzido o delay entre scrolls de 250ms para 200ms
+        }
+    }, { passive: false });
+}
+
+// Inicializar o scroll suave do mouse quando a página carregar
+document.addEventListener('DOMContentLoaded', addSmoothMouseScroll);
+
+// Exemplo de uso: chame scrollToMainContent() quando quiser rolar para o conteúdo principal
+// Exemplo: Adicione a um botão no HTML: <button onclick="scrollToMainContent()">↓</button>

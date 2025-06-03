@@ -1,166 +1,145 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.login-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(33, 147, 176, 0.15);
-    width: 100%;
-    max-width: 400px;
+    align-items: center;
+    min-height: 100vh;
     position: relative;
-    animation: fadeIn 0.6s ease-out;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    /* Fundo: degradê roxo-azul com detalhes */
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 50%, #0f2027 100%);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Detalhes: gradientes radiais e linhas */
+    background:
+        radial-gradient(circle at 25% 30%, rgba(255, 94, 98, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(58, 141, 222, 0.18) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(255,94,98,0.07) 0 2px, transparent 2px 20px),
+        repeating-linear-gradient(-45deg, rgba(58,141,222,0.07) 0 2px, transparent 2px 20px);
+    z-index: -1;
+    pointer-events: none;
+    animation: fundoAnimado 18s linear infinite;
+}
+
+@keyframes fundoAnimado {
+    0% { background-position: 0% 0%, 100% 100%, 0 0, 0 0; }
+    100% { background-position: 100% 100%, 0% 0%, 100px 100px, -100px -100px; }
 }
 
 .voltar-btn {
-    position: absolute;
-    top: -50px;
-    left: 0;
+    position: fixed;
+    top: 20px;
+    right: 20px;
     color: white;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    transition: transform 0.3s;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease, background 0.3s;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(30, 8, 90, 0.15);
 }
 
 .voltar-btn:hover {
-    transform: translateX(-5px);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
+    box-shadow: 0 6px 18px rgba(58, 141, 222, 0.18);
+    transform: translateY(-2px);
 }
 
-.voltar-icon {
-    font-size: 1.2rem;
+.login-container {
+    background: rgba(30, 8, 90, 0.92);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(58, 141, 222, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
 .login-form h1 {
-    color: #185a9d;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
     text-align: center;
-}
-
-.subtitle {
-    color: #666;
-    text-align: center;
+    color: #3a8dde;
     margin-bottom: 2rem;
+    text-shadow: 0 2px 8px rgba(58, 141, 222, 0.15);
 }
 
-.input-group {
+.form-group {
+    position: relative;
     margin-bottom: 1.5rem;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #2193b0;
-    font-weight: 600;
-}
-
-.input-group input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-group input {
+    width: 90%;
+    padding: 1rem 1rem 1rem 2.5rem;
+    border: 2px solid #1e085a;
+    border-radius: 25px;
     font-size: 1rem;
-    transition: all 0.3s;
-    background: #f8f9fa;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    text-align: left;
 }
 
-.input-group input:focus {
-    border-color: #43cea2;
-    background: white;
+.form-group input:focus {
+    border-color: #3a8dde;
     outline: none;
-    box-shadow: 0 0 0 4px rgba(67, 206, 162, 0.1);
+    box-shadow: 0 0 0 3px rgba(58,141,222,0.13);
+    background: rgba(30,8,90,0.13);
 }
 
-.options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+.form-group input:hover {
+    border-color: #3a8dde;
+    background: rgba(30,8,90,0.1);
 }
 
-.lembrar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #555;
-    cursor: pointer;
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.5);
 }
 
-.lembrar input[type="checkbox"] {
-    accent-color: #43cea2;
+/* Autofill styles */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 1000px #1e085a inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
-.esqueci-senha {
-    color: #2193b0;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.esqueci-senha:hover {
-    color: #43cea2;
-    text-decoration: underline;
+/* Icon position */
+.form-group i {
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 1.2rem;
 }
 
 .login-btn {
     width: 100%;
     padding: 12px;
+    background: linear-gradient(135deg, #1e085a 0%, #3a8dde 100%);
+    color: white;
     border: none;
     border-radius: 25px;
-    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-    color: white;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+    box-shadow: 0 4px 16px rgba(30, 8, 90, 0.15);
 }
 
 .login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(67, 206, 162, 0.2);
-}
-
-.cadastro-link {
-    text-align: center;
-    margin-top: 1.5rem;
-    color: #666;
-}
-
-.cadastro-link a {
-    color: #2193b0;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
-.cadastro-link a:hover {
-    color: #43cea2;
-    text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-    .login-container {
-        margin: 1rem;
-        padding: 2rem;
-    }
-
-    .voltar-btn {
-        top: -40px;
-    }
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(58, 141, 222, 0.18);
+    background: linear-gradient(135deg, #3a8dde 0%, #1e085a 100%);
 }
