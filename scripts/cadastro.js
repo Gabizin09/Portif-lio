@@ -158,5 +158,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
+
+    // Deslizamento de tela até o final e início da página com as teclas PageDown/PageUp ou setas
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "PageDown") {
+            e.preventDefault();
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        if (e.key === "PageUp") {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        // Opcional: setas para cima/baixo para rolar suavemente
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            window.scrollBy({
+                top: window.innerHeight * 0.8,
+                behavior: 'smooth'
+            });
+        }
+        if (e.key === "ArrowUp") {
+            e.preventDefault();
+            window.scrollBy({
+                top: -window.innerHeight * 0.8,
+                behavior: 'smooth'
+            });
+        }
+    });
 });
-    
