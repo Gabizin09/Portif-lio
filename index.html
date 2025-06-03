@@ -13,31 +13,42 @@
             <nav class="nav-menu">
                 <div class="nav-links">
                     <a href="login.html" class="nav-button">Entrar</a>
-                    <a href="cadastro.html" class="nav-button">Cadastro</a>
+                    <a href="cadastro.html" class="nav-button destaque">Cadastre-se</a>
                 </div>
             </nav>
         </div>
     </header>
 
     <main class="main-content">
+        <!-- Banner motivacional -->
+        <section class="banner-motivacional" id="bannerMotivacional">
+            <span class="banner-icon">🚀</span>
+            <span class="banner-text" id="bannerText">
+                Sua nova oportunidade está a um clique! <b>Cadastre-se</b> e encontre o emprego ideal.
+            </span>
+        </section>
+
         <section class="hero-section">
-            <h1>Encontre o emprego dos seus sonhos</h1>
-            <p class="subtitle">Milhares de vagas esperando por você</p>
+            <h1>
+                <span class="hero-icon">💼</span>
+                Encontre o emprego dos seus sonhos
+            </h1>
+            <p class="subtitle">Milhares de vagas esperando por você em todo o Brasil</p>
             
             <form id="search-form" class="search-container">
                 <div class="search-inputs">
                     <div class="input-group">
                         <i class="search-icon">🔍</i>
-                        <input type="text" id="search-keyword" placeholder="Cargo ou palavra-chave" required>
+                        <input type="text" id="search-keyword" placeholder="Cargo, palavra-chave ou empresa" required>
                     </div>
                     <div class="input-group">
                         <i class="location-icon">📍</i>
-                        <input type="text" id="search-location" placeholder="Localização" required>
+                        <input type="text" id="search-location" placeholder="Cidade, estado ou remoto" required>
                     </div>
                     <button type="submit" class="search-button">Buscar Vagas</button>
                 </div>
             </form>
-        
+            
         </section>
 
         <section class="results-section">
@@ -51,6 +62,11 @@
             </div>
         </section>
     </main>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <span>© 2025 Inimigos do Emprego — Conectando talentos e oportunidades</span>
+        </div>
+    </footer>
     <script src="./scripts/script.js"></script>
 </body>
 </html>

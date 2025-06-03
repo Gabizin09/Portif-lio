@@ -201,3 +201,29 @@ function displaySearchResults(results) {
 
 // Carregar vagas em destaque quando a página carregar
 document.addEventListener('DOMContentLoaded', displayFeaturedJobs);
+
+// Banners rotativos para o topo
+const banners = [
+    'Sua nova oportunidade está a um clique! <b>Cadastre-se</b> e encontre o emprego ideal.',
+    '💡 Atualize seu currículo e aumente suas chances de ser contratado!',
+    '🌎 Vagas para todo o Brasil e também para trabalho remoto.',
+    '🚀 Cadastre-se para receber vagas no seu e-mail!',
+    '👔 Empresas de destaque estão procurando por você!'
+];
+
+let bannerIndex = 0;
+const bannerText = document.getElementById('bannerText');
+
+function rotateBanner() {
+    if (!bannerText) return;
+    bannerText.style.opacity = 0;
+    setTimeout(() => {
+        bannerIndex = (bannerIndex + 1) % banners.length;
+        bannerText.innerHTML = banners[bannerIndex];
+        bannerText.style.opacity = 1;
+    }, 500);
+}
+
+if (bannerText) {
+    setInterval(rotateBanner, 4000);
+}

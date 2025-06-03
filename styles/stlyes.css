@@ -313,6 +313,89 @@ body {
     color: #666;
 }
 
+/* Banner Motivacional */
+.banner-motivacional {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    padding: 1.1rem 2rem;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    animation: bannerFadeIn 1s ease;
+}
+
+.banner-icon {
+    font-size: 2rem;
+}
+
+@keyframes bannerFadeIn {
+    from { opacity: 0; transform: translateY(-30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.hero-icon {
+    font-size: 2rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.call-to-action {
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgba(33, 147, 176, 0.07);
+    padding: 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.08rem;
+    color: #185a9d;
+}
+
+.cta-btn {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    padding: 0.7rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+    margin-top: 0.5rem;
+}
+
+.cta-btn:hover {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.nav-button.destaque {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    border: 2px solid #43cea2;
+}
+
+/* Footer */
+.main-footer {
+    background: rgba(24, 90, 157, 0.95);
+    color: #fff;
+    text-align: center;
+    padding: 1.2rem 0;
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -344,4 +427,8 @@ body {
     .job-card {
         padding: 1rem;
     }
+}
+
+.banner-text {
+    transition: opacity 0.5s;
 }
